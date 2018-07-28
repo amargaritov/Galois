@@ -62,6 +62,9 @@ set(USE_EMBEDDED_REVISION ON CACHE BOOL "Embed revision numbers")
 # Enable cross compilation for specific architectures: For eg. -march=knl for knl architecture
 set(USE_ARCH native CACHE STRING "Use specific architecture for cross compilation (Default : native)")
 
+#dmitrii
+set(APP_EXTLIBS /home/ustiugov/dune/libdune/libdune.a )
+
 ###### Configure (users don't need to go beyond here) ######
 
 enable_testing()
@@ -381,6 +384,7 @@ function(linkApp name extlibs)
   target_link_libraries(${name} galois_shmem)
   target_link_libraries(${name} gllvm)
   target_link_libraries(${name} rt)
+  target_link_libraries(${name} dune)
   target_link_libraries(${name} ${CMAKE_THREAD_LIBS_INIT})
 
   if(VTune_FOUND)
