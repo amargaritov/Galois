@@ -26,6 +26,13 @@
 #include "galois/graphs/TypeTraits.h"
 #include "galois/gstl.h"
 
+#define DUNE_ENABLED
+
+#ifdef DUNE_ENABLED
+    #include "libdune/dune.h"
+    #include "libdune/cpu-x86.h"
+#endif
+
 const char* desc =
     "Computes page ranks a la Page and Brin. This is a pull-style algorithm.";
 
@@ -252,6 +259,20 @@ void prResidual(Graph& graph) {
 }
 
 int main(int argc, char** argv) {
+#ifdef DUNE_ENABLED
+  volatile int ret;
+
+  printf("hello: not running dune yet\n");
+
+  ret = dune_init_and_enter();
+  if (ret) {
+      printf("failed to initialize dune\n");
+      return ret;
+  }
+
+  printf("hello: now printing from dune mode\n");
+#endif
+
   galois::SharedMemSys G;
   LonestarStart(argc, argv, name, desc, url);
 
