@@ -1,5 +1,5 @@
-include_directories( ${PROJECT_SOURCE_DIR}/../../dune )
-link_directories( ${PROJECT_SOURCE_DIR}/../../dune/libdune )
+include_directories( ${PROJECT_SOURCE_DIR}/../linux/dune )
+link_directories( ${PROJECT_SOURCE_DIR}/../linux/dune/libdune )
 
 app(bfs bfs.cpp)
 app(bfs_dune bfs_dune.cpp)
